@@ -11,6 +11,11 @@ if len(sys.argv) < 3:
     sys.exit(1)
 
 input_file, output_file = sys.argv[1], sys.argv[2]
+
+if not os.path.exists(input_file):
+    print(f"!!! Error: The input file '{input_file}' does not exist.")
+    sys.exit(1)
+
 file_type = output_file.split('.')[-1]
 
 print(f"Converting '.{input_file.split('.')[-1]}' to '.{file_type}'")
