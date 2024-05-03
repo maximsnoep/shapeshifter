@@ -7,7 +7,7 @@ import tetgen
 
 if len(sys.argv) < 3:
     print("Usage: python ./converter.py <input-file> <output-file>")
-    print("Supported output formats are '.obj' (surface) or '.mesh' (volumetric)")
+    print("Supported output formats are '.obj/.stl' (surface) or '.mesh' (volumetric)")
     sys.exit(1)
 
 input_file, output_file = sys.argv[1], sys.argv[2]
@@ -19,7 +19,7 @@ if not os.path.exists(input_file):
 file_type = output_file.split('.')[-1]
 
 print(f"Converting '.{input_file.split('.')[-1]}' to '.{file_type}'")
-if file_type == "obj":
+if file_type == "obj" or file_type == "stl":
     pyvista.save_meshio("temp.stl", pyvista.read(input_file))
     gmsh.initialize()
     gmsh.open("temp.stl")
